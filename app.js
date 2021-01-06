@@ -10,7 +10,7 @@ var app = express();
 const route = require('./routes/route');
 const usersRouter = require('./routes/users');
 
-mongoose.connect('mongodb+srv://user:user@cluster0.z6kdb.mongodb.net/contactlist?retryWrites=true&w=majority');
+mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('connected', () => {
     console.log('Connected to database mongodb');
 });
