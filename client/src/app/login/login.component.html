@@ -1,0 +1,37 @@
+<div class="row" style="margin-top:40px; padding:20px; background-color:#eff0f2;border-radius:15px;
+-webkit-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+-moz-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);color:#000000">
+  <div *ngIf="loginErrorMsg" style="text-align:center;" class="col-sm-12 alert alert-danger">
+    {{loginErrorMsg}}
+  </div>
+  <div class="col-sm-12" style="text-align:center;">
+    Login
+  </div>
+
+  <div class="col-sm-12">
+    <form [formGroup]="loginForm">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <div *ngIf="wasSubmitted && loginFormControls.email.errors" class="text-danger">
+          <div *ngIf="loginFormControls.email.errors.required">Email is required</div>
+          <div *ngIf="loginFormControls.email.invalid && !loginFormControls.email.errors.required">Email is invalid</div>
+        </div>
+        <small id="emailHelp" class="form-text text-muted"></small>
+      </div>
+      <div class="form-group">
+        <label for="passwordInput">Password</label>
+        <input formControlName="password" type="password" class="form-control" id="passwordInput" aria-describedby="passHelp" placeholder="password">
+        <div *ngIf="wasSubmitted && loginFormControls.password.errors" class="text-danger">
+          <div *ngIf="loginFormControls.password.errors.required">Password is required</div>
+        </div>
+        <small id="passHelp" class="form-text text-muted"></small>
+      </div>
+
+      <div class="form-group" style="text-align:center;">
+          <button type="button" class="btn btn-dark" (click)="login()">Log in</button>
+      </div>
+    </form>
+  </div>
+</div>

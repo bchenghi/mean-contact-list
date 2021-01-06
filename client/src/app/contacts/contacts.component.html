@@ -1,0 +1,42 @@
+<div class="container">
+    <br>
+    <h1>Welcome {{username}}</h1>
+    <input type="button" (click)="logout()" value="Logout" class="btn btn-dark">
+    <br><br>
+    <h2 class="page-header">Add Contact</h2>
+    <form [formGroup]="contactForm" (ngSubmit)="addContact(contactForm.value)">
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" name="first_name" class="form-control" formControlName="first_name">
+        </div>
+        <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" name="last_name" class="form-control" formControlName="last_name">
+        </div>
+        <div class="form-group">
+            <label>Phone No.</label>
+            <input type="text" name="phone" class="form-control" required formControlName="phone">
+        </div>
+        <input type="submit" class="btn btn btn-success" value="Add">
+    </form>
+</div>
+<hr>
+<div class="container">
+    <div *ngFor="let contact of contacts">
+        <div class="row">
+            <div class="col-md-3">
+                {{contact.first_name}}
+            </div>
+            <div class="col-md-3">
+                {{contact.last_name}}
+            </div>
+            <div class="col-md-3">
+                {{contact.phone}}
+            </div>
+            <div class="col-md-3">
+                <input type="button" (click)="deleteContact(contact._id)" value="Delete" class="btn btn-danger">
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
