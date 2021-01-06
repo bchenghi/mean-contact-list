@@ -10,9 +10,9 @@ var app = express();
 const route = require('./routes/route');
 const usersRouter = require('./routes/users');
 
-mongoose.connect('mongodb://localhost:27017/contactlist');
+mongoose.connect('mongodb+srv://user:user@cluster0.z6kdb.mongodb.net/contactlist?retryWrites=true&w=majority');
 mongoose.connection.on('connected', () => {
-    console.log('Connected to database mongodb @27017');
+    console.log('Connected to database mongodb');
 });
 mongoose.connection.on('error', (err) => {
     if (err) {
