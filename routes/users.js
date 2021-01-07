@@ -4,6 +4,7 @@ var User = require('../models/user');
 var passport = require('passport');
 var cors = require('cors');
 var bodyparser = require('body-parser');
+const csp = require('express-csp-header');
 
 const jsonParser = bodyparser.json();
 
@@ -12,6 +13,13 @@ router.use(jsonParser);
 router.use(cors({
     origin: true,
     credentials: true
+}));
+
+app.use(csp({
+  policies: {
+      'default-src': [csp.NONE],
+      'img-src': [csp.SELF],
+  }
 }));
 
 router.post('/register', function (req, res, next) {
