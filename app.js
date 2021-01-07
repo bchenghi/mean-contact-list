@@ -6,11 +6,12 @@ var path = require('path');
 var passport = require('passport');
 var session = require('express-session');
 var app = express();
+const { expressCspHeader, SELF, NONE } = require('express-csp-header');
 
 const route = require('./routes/route');
 const usersRouter = require('./routes/users');
 
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/contactlist');
 mongoose.connection.on('connected', () => {
     console.log('Connected to database mongodb');
 });
@@ -47,6 +48,13 @@ app.use(cors({
 }));
 
 app.use(bodyparser.json());
+
+app.use(expressCspHeader({
+    directives: {
+        'default-src': [NONE],
+        'img-src': [SELF]
+    }
+  }));
 
 
 const port = process.env.PORT || 8080;
