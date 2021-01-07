@@ -3,7 +3,7 @@ const router = express.Router();
 var bodyparser = require('body-parser');
 var cors = require('cors');
 var passport = require('passport');
-const csp = require('express-csp-header');
+const { expressCspHeader, SELF, NONE } = require('express-csp-header');
 
 const jsonParser = bodyparser.json();
 
@@ -14,10 +14,10 @@ router.use(cors({
     credentials: true
 }));
 
-app.use(csp({
-    policies: {
-        'default-src': [csp.NONE],
-        'img-src': [csp.SELF],
+router.use(expressCspHeader({
+    directives: {
+        'default-src': [NONE],
+        'img-src': [SELF]
     }
 }));
 
